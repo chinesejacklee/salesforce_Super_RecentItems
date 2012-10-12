@@ -1,0 +1,223 @@
+<apex:page standardcontroller="TransferOwner__c" extensions="TransferOwner" >  
+<apex:sectionHeader title="FREE Mass TEO Transfer Tool" help="/apex/transferhelp"/>
+<apex:form onsubmit="return validateForm(this);">
+<apex:pageBlock title="Mass TEO Transfer" mode="edit">
+<table style="width:100%;" cellspacing="0" cellpadding="0">
+<tr>
+<!-- UI  -->
+<td style="width:50%;">
+    <apex:pageMessages />
+
+	<table cellspacing="0" cellpadding="0" style="padding-left:10px">
+	
+	    <tr>
+	        <td colspan="2" style="font-weight:bold;padding-top:20px;padding-bottom:20px;">Select original owner and new owner.
+	        </td> 
+	    </tr> 
+	<tr>
+	        <td style="">Original Owner:&nbsp;&nbsp;</td><td><apex:inputField value="{!TransferOwner__c.Original_Owner__c}" style="width:150px" id="oldowner" /></td>
+	    </tr>
+	    <tr>
+	        <td style="">New Owner:&nbsp;&nbsp;</td><td><apex:inputField value="{!TransferOwner__c.New_Owner__c}" style="width:150px" id="newowner"/></td>
+	    </tr>
+	        <tr>
+	        <td colspan="2" style="padding-top:10px;padding-bottom:10px;">
+	        </td>
+	    </tr>
+	    <!--  
+	        <tr>  
+	        <td style="font-weight:bold;">Select all open activities ends today and later:&nbsp;&nbsp;</td><td><apex:inputCheckbox value="{!TransferOwner__c.Select_All_Open_Records__c}" onclick="CleanandHideDates();"  id="selectall"/></td>
+	    </tr>
+	 -->
+	     <tr>
+	        <td colspan="2" style="font-weight:bold;padding-bottom:20px;">Select activities from date and to date.
+	        </td> 
+	</tr>
+	<tr >
+	        <td style="">From Date:&nbsp;&nbsp;</td><td><apex:inputField value="{!TransferOwner__c.Start_Date__c}" style="width:150px" id="startdate" /></td>
+	</tr>
+	<tr >
+	        <td style="">To Date:&nbsp;&nbsp;</td><td><apex:inputField value="{!TransferOwner__c.End_Date__c}" style="width:150px" id="enddate"/></td>
+	    </tr>
+	
+	    <tr>
+	        <td colspan="2" style="font-weight:bold;padding-top:20px;padding-bottom:20px;">Tick to transfer activities and/or opportunities.
+	        </td>
+	    </tr>
+	    <tr>
+	        <td style="">Transfer All Open Activities:&nbsp;&nbsp;</td><td><apex:inputCheckbox value="{!TransferOwner__c.Activities__c}" id="act"/></td>
+	    </tr>
+	    <tr>
+	        <td style="">Transfer All Open Opportunities:&nbsp;&nbsp;</td><td><apex:inputCheckbox value="{!TransferOwner__c.Opportunities__c}" id="oppo"/></td>
+	    </tr>
+	    
+	   
+	    <tr align="right">
+	        
+	        <td style="height:40px"><br/><apex:commandButton action="{!ShowCounters}" value="Preview" id="Preview" onclick="preview=true;" rerender="showcounter" oncomplete="disableloading();"/>
+	        </td>
+	        <td style="height:40px"><br/><apex:commandButton action="{!Save}" value="Start Transfer" onclick="preview=false;" id="save" />
+	        </td>
+	    </tr>
+	
+	
+	</table>
+	<div id="load" style="display:none">Loading data...<img src="{!URLFOR($Resource.AjaxLoading)}" /><br/></div>
+	<apex:outputpanel id="showcounter" style="display:none">
+	<table style="width:50%" cellspacing="0" cellpadding="0">
+	
+	       <tr>
+	        <td colspan="2" style=""><br/></td>
+	    </tr>
+	    <tr>
+	        <td colspan="2" style="background-color:black;height:2px;"></td>
+	    </tr>
+	    <tr>
+	        <td colspan="2" style="">Number of records will be transferred:</td>
+	    </tr> 
+	    <tr>
+	        <td style="font-weight:bold">No. of Events:&nbsp;&nbsp;</td><td>{!EventCount}</td>
+	    </tr> 
+	    <tr>
+	        <td style="font-weight:bold">No. of Tasks:&nbsp;&nbsp;</td><td>{!TaskCount}</td>
+	    </tr>
+	    <tr>
+	        <td style="font-weight:bold">No. of Opportunities:&nbsp;&nbsp;</td><td>{!OppoCount}</td>
+	    </tr>
+	    </table>
+	    </apex:outputpanel>
+	<div id="error" style="color:red;font-weight:bold"></div><br/>
+	<apex:outputText style="color:red;font-weight:bold" value="{!NoAction}" />
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<script>
+	 
+	var preview=false;
+	function showloading(){
+	    document.getElementById("load").style.display="block";
+	    
+	}
+	function disableloading(){
+	    document.getElementById("load").style.display="none";
+	    document.getElementById("{!$Component.showcounter}").style.display="block";
+	}
+
+	function CleanandHideDates(){
+	    if(document.getElementById("{!$Component.startdate}").disabled==false){
+	            document.getElementById("{!$Component.startdate}").value='';
+	        document.getElementById("{!$Component.startdate}").disabled=true;
+	        document.getElementById("{!$Component.enddate}").value='';
+	        document.getElementById("{!$Component.enddate}").disabled=true;
+	    }
+	    else{
+	        document.getElementById("{!$Component.startdate}").disabled=false;
+	        document.getElementById("{!$Component.enddate}").disabled=false;
+	    }
+	 
+	}
+	function validateForm(form){
+	
+	    if(document.getElementById("{!$Component.oldowner}").value.length==0 || document.getElementById("{!$Component.newowner}").value.length==0){
+	        document.getElementById("error").innerHTML='Please select both Original Owner and New Owner.';
+	        
+	        //alert('Please fill in both Original Owner and New Owner fields');
+	        return false;
+	    }
+	    if(document.getElementById("{!$Component.oldowner}").value==document.getElementById("{!$Component.newowner}").value){
+	        document.getElementById("error").innerHTML='Original Owner cannot be the same as New Owner.';
+	        //alert('Original Owner can not be the same with New Owner');
+	        return false;
+	    }
+	    if(document.getElementById("{!$Component.act}").checked==false && document.getElementById("{!$Component.oppo}").checked==false){
+	        document.getElementById("error").innerHTML='Please tick either Transfer Open Activities or Transfer Open Oopportunities.';
+	        //alert('Please check activities or Opportunities');
+	        return false;
+	    }
+	
+	    if( document.getElementById("{!$Component.act}").checked==true && (document.getElementById("{!$Component.startdate}").value.length==0 || document.getElementById("{!$Component.enddate}").value.length==0)){
+	        document.getElementById("error").innerHTML='Please select both Form Date and To Date.';
+	        
+	        //alert('Please fill in both Start Date and End Date fields.');
+	        return false;
+	    } 
+	    var msgPart1;
+	    if(document.getElementById("{!$Component.act}").checked && document.getElementById("{!$Component.oppo}").checked){
+	        msgPart1='all open activities and opportunities ';
+	    }
+	    if(document.getElementById("{!$Component.act}").checked && (!document.getElementById("{!$Component.oppo}").checked)){
+	        msgPart1='all open activities ';
+	    }
+	    if((!document.getElementById("{!$Component.act}").checked) && document.getElementById("{!$Component.oppo}").checked){
+	        msgPart1='all open opportunities ';
+	    }
+	    var msgPart2;
+	    msgPart2='from '+document.getElementById("{!$Component.oldowner}").value+' to '+document.getElementById("{!$Component.newowner}").value;
+	    var msgPart3;
+	    if(document.getElementById("{!$Component.act}").checked==true && document.getElementById("{!$Component.startdate}").value.length>0 && document.getElementById("{!$Component.enddate}").value.length>0){
+	        msgPart3=' between '+document.getElementById("{!$Component.startdate}").value+' and '+document.getElementById("{!$Component.enddate}").value+'.';
+	    }
+	    else{
+	    //select all open records
+	        msgPart3="."
+	    }
+	    
+	    if(preview==true){
+	        var r=true;
+	        }
+	    else{
+	        var r=confirm("Please confirm: you are going to transfer"+msgPart1+msgPart2+msgPart3);
+	    }
+	    
+	    if (r==true)
+	      {
+	      showloading();
+	      document.getElementById("error").innerHTML='';
+	      return true;
+	      }
+	    else
+	      {
+	      return false;
+	      }
+	}
+	
+	</script>
+</td>
+<!-- UI ends -->
+<!-- ads area -->
+<td style="padding-left:20px;width:50%;height:100%">
+	
+	<table cellspacing="0" cellpadding="0" style="width:100%;height:100%;border-top:1px solid black;
+	border-right:1px solid black;
+	border-bottom:1px solid black;
+	border-left:1px solid black;
+	border-collapse:collapse;">
+		<tr style="background-color:#0099CC;" >
+	       <td style="text-align:center;padding-top:10px"><img src="{!URLFOR($Resource.Sales4s_Banner)}" style="border:1px solid black"/></td>
+	    </tr>
+		<tr style="background-color:#0099CC;">
+		  <td style="color:white;font-weight:bold;padding-left:4px;padding-top:4px">
+			<a style="color:white;"  href="http://www.sales4s.net/products">Mass TEO Transfer Tool</a> helps you to transfer ownership of tasks, events and opportunities from one user to another.<br/><br/>For 
+			help, simply click 'Help for this page' or <a style="color:white;" href="/apex/transferhelp">here</a><br/><br/>
+			Visit our website <a style="color:white;" href="http://www.Sales4s.net">www.Sales4s.net</a> to find more FREE tools can help you to manage your day to day Salesforce activities.<br/><br/>
+		  </td>
+		</tr>
+		
+		<tr style="background-color:#0099CC;height:100%" >
+		  <td><iframe src="http://sales4s-developer-edition.na7.force.com" frameborder="0" style="width:100%;height:100%"/></td>
+		</tr>
+	</table>
+</td>
+<!-- ads area ends -->
+</tr>
+</table>
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

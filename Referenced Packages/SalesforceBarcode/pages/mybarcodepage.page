@@ -1,0 +1,5 @@
+<apex:page showheader="false" standardcontroller="product2">
+<!--add the two new fields into the page -->
+<c:Barcode code="{!product2.S4SBarcode__Code__c}" desc="{!product2.S4SBarcode__code_desc__c}" />
+
+</apex:page>

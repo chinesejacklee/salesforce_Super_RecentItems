@@ -1,0 +1,28 @@
+<apex:page Controller="RecentItemsFilter">
+ 
+<apex:form >
+
+<apex:outputtext rendered="{!IF(mode=='enable', true, false)}" >
+
+<apex:pageBlock title="{!$User.FirstName} {!$User.LastName}'s Recent Item Pro Filter" mode="edit">
+<apex:pageMessages />
+<apex:pageBlockButtons >
+<apex:commandButton action="{!save}" value="Save"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Only track following selected objects" columns="2">
+<apex:inputField value="{!anitem.Objects_List__c}"/>
+<apex:inputField value="{!anitem.No_Of_Displayed_Items__c}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+
+</apex:outputtext>
+
+<apex:outputtext rendered="{!IF(mode=='disable', true, false)}" >
+<br/><br/>
+    <font style="font-weight:bold;color:red">Error: The filter you are trying to access either does not exist or it belongs to someone else. 
+    <br/><br/>If you think this is a mistake please contact your Salesforce Admin.</font>
+</apex:outputtext>
+
+</apex:form>
+
+</apex:page>

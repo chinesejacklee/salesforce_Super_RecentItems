@@ -1,0 +1,54 @@
+<apex:page controller="RecentItem" showheader="false" action="{!GetRecentItem}">  
+
+<apex:includeScript value="{!URLFOR($Resource.treeview,'jQuery1_3_2.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.treeview,'jquery_cookie.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.treeview,'jquery_treeview.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.jquery_ui)}" />
+<apex:stylesheet value="{!URLFOR($Resource.treeview,'jquery.css')}"/> 
+
+<body style="font-family:'Arial','Helvetica',sans-serif;font-size:75%;background-color: #CFEEF8" >
+
+ <script>
+  jQuery(document).ready(function(){
+    
+    $("#example").treeview({
+        animated: "fast",
+        persist: "cookie"
+    });
+
+  });
+
+  </script>
+
+    <apex:outputLink value="{!FilterID}" id="theLink" target="_parent"><font style="font-size:9px;">Customize My Filter</font></apex:outputLink><br/>
+
+<div style="height:4px"></div>
+<ul id="example" class="filetree">
+	<apex:repeat value="{!ObjectNameList}" var="a" >
+	             <li><span class="folder"><apex:outputText value="{!a}" /></span>
+                    <apex:repeat value="{!myrecentitemsList}" var="arecord" >
+                        <apex:outputText rendered="{!IF(a==arecord.ObjectName, true, false)}" >
+                        <ul>
+                    
+                            <li style="background-color:#CFEEF8">
+                                <span class="file">
+                                      <a id="{!arecord.recordid}" href="{!arecord.RecordLink}" target="_parent" title="{!arecord.RecordName}">{!arecord.RecordName}</a>
+                                      <script>
+                                        var nammestr=document.getElementById( '{!arecord.recordid}' ).innerHTML;
+                                        if(nammestr.length>22){
+                                            nammestr=nammestr.substring(0,19)+'...';
+                                            document.getElementById( '{!arecord.recordid}' ).innerHTML=nammestr; 
+                                        }
+                                      </script>  
+                                </span>
+                            </li> 
+                        </ul> 
+                        </apex:outputText>
+ 
+                   </apex:repeat>
+            </li>  
+	</apex:repeat>
+   
+</ul>
+</body>
+</apex:page>

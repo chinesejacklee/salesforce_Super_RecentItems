@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom object holds all transfer records</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>Activities__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Transfer all open activities.</inlineHelpText>
+        <label>Activities</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>New_Owner__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The new owner of activities/opportunities.</inlineHelpText>
+        <label>New Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>TransferOwnersNewOwner</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>No_of_Events_Transfered__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of events that were transferred.</inlineHelpText>
+        <label>No. of Events Transferred</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_Opportunities_Transfered__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of opportunities that were transferred.</inlineHelpText>
+        <label>No. of Opportunities Transferred</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_Tasks_Transfered__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of tasks that were transferred.</inlineHelpText>
+        <label>No. of Tasks Transferred</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunities__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Transfer all open opportunities.</inlineHelpText>
+        <label>Opportunities</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Original_Owner__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The original owner of activities/opportunities.</inlineHelpText>
+        <label>Original Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>TransferOwnersOldOwner</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Select_All_Open_Records__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Select All Open Records</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <label>Transfer Owner</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Original_Owner__c</columns>
+        <columns>New_Owner__c</columns>
+        <columns>Activities__c</columns>
+        <columns>Opportunities__c</columns>
+        <columns>No_of_Tasks_Transfered__c</columns>
+        <columns>No_of_Events_Transfered__c</columns>
+        <columns>No_of_Opportunities_Transfered__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>TO-{0000}</displayFormat>
+        <label>Transfer Owner Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Transfer Owners</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Original_Owner__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>New_Owner__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Activities__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Opportunities__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>No_of_Tasks_Transfered__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>No_of_Events_Transfered__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>No_of_Opportunities_Transfered__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATEDBY_USER</customTabListAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&lt;iframe marginwidth=&quot;0&quot; src=&quot;/apex/S4SRecentItems__HiddenRecentItems&quot; frameborder=&quot;0&quot; height=&quot;0&quot; width=&quot;0&quot;&gt;&lt;/iframe&gt;&lt;script src=&quot;/resource/1257830898000/S4SRecentItems__treeview/jQuery1_3_2.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&lt;script type=&quot;text/javascript&quot;&gt;jQuery(document).ready(function() {  $(&apos;h2:contains(#)&apos;).html(&apos;&apos;);});&lt;/script&gt;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>narrow</width>
+</HomePageComponent>

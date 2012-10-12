@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&lt;!--This is a home page component to track user&apos;s activity without exposing
+anything on the saidbar UI except .(dot) as component name. It uses .(dot) as
+component name to minimize the visual impact on the side bar. It is
+possible to add javascript code here to remove the .(dot) from the
+sidebar UI by looking the sidebar source code.For more detailed info,
+please visit www.sales4s.net --&gt;&lt;iframe marginwidth=&quot;0&quot; src=&quot;/apex/S4SRecentItems__HiddenRecentItems&quot; frameborder=&quot;0&quot; height=&quot;0&quot; width=&quot;0&quot;&gt;&lt;/iframe&gt;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>narrow</width>
+</HomePageComponent>

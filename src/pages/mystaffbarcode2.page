@@ -1,0 +1,5 @@
+<apex:page showheader="false" standardcontroller="My_Staff__c">
+<body style="background-color:white">
+<S4SBarcode:Barcode code="{!My_Staff__c.code2__c}" desc="{!My_Staff__c.des2__c}" />
+</body>
+</apex:page>

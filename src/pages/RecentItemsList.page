@@ -1,0 +1,19 @@
+<apex:page controller="RecentItem" showheader="false" action="{!GetRecentItem}">  
+
+
+    <body style="font-family:'Arial','Helvetica',sans-serif;font-size:75%;color='#CFEEF8'" >
+
+    <table width="100%">
+
+		<apex:repeat value="{!RIList}" var="item" >
+		<tr>
+			<td valign="top" align="left">{!item.object__c}</td>
+			<td valign="top" align="left">
+			  <a href="{!item.link__c}" target="_parent">{!item.record_name__c}</a>
+			</td>
+		</tr>    
+		</apex:repeat>
+	
+	</table>
+</body>
+</apex:page>

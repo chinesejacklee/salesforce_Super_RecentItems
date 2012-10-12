@@ -1,0 +1,11 @@
+<apex:page showheader="false">
+<apex:includeScript value="{!URLFOR($Resource.treeview,'jQuery1_3_2.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.treeview,'jquery_cookie.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.treeview,'jquery_treeview.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.jquery_ui)}" />
+
+<apex:stylesheet value="{!URLFOR($Resource.treeview,'jquery.css')}"/>
+<body>
+
+</body> 
+</apex:page>

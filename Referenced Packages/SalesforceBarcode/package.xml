@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesforceBarcode</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <namespacePrefix>S4SBarcode</namespacePrefix>
+    <types>
+        <members>Barcode</members>
+        <name>ApexComponent</name>
+    </types>
+    <types>
+        <members>mybarcodepage</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>Product2.Code__c</members>
+        <members>Product2.code_desc__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>mycss</members>
+        <members>myjs</members>
+        <name>StaticResource</name>
+    </types>
+    <version>20.0</version>
+</Package>
