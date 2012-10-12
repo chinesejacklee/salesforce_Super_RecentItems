@@ -1,4 +1,0 @@
-<apex:page >
- <apex:include pageName="{!URLFOR('/partnerbt/lmo/subOrgLogin.apexp')}">
- </apex:include>
-</apex:page>
